@@ -55,13 +55,15 @@ export default function Page() {
           <div className="va-line-draw" />
           <div className="va-stats-grid">
             {[
-              { num: '50+',  label: 'Projects delivered' },
-              { num: '98%',  label: 'Client retention'   },
-              { num: '4×',   label: 'Faster delivery'    },
-              { num: '12+',  label: 'Industries served'  },
+              { num: '50', suffix: '+', label: 'Projects delivered' },
+              { num: '98', suffix: '%', label: 'Client retention'   },
+              { num: '4',  suffix: '×', label: 'Faster delivery'    },
+              { num: '12', suffix: '+', label: 'Industries served'  },
             ].map(s => (
               <div key={s.label} className="va-stat-card tilt-card">
-                <div className="va-stat-number">{s.num}</div>
+                <div className="va-stat-number">
+                  {s.num}<span className="va-stat-suffix">{s.suffix}</span>
+                </div>
                 <div className="va-stat-label">{s.label}</div>
               </div>
             ))}

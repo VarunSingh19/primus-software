@@ -16,12 +16,12 @@ function MiniChart() {
   return (
     <div className="wu-chart" aria-hidden="true">
       <div className="wu-chart__bars">
-        <div style={{ height: '55%',  background: '#6366f1' }} />
-        <div style={{ height: '75%',  background: '#818cf8' }} />
-        <div style={{ height: '45%',  background: '#6366f1' }} />
-        <div style={{ height: '90%',  background: '#22d3ee' }} />
-        <div style={{ height: '65%',  background: '#6366f1' }} />
-        <div style={{ height: '100%', background: '#818cf8' }} />
+        <div style={{ height: '55%',  background: '#2b2bff' }} />
+        <div style={{ height: '75%',  background: '#6b6bff' }} />
+        <div style={{ height: '45%',  background: '#2b2bff' }} />
+        <div style={{ height: '90%',  background: '#a5b4fc' }} />
+        <div style={{ height: '65%',  background: '#2b2bff' }} />
+        <div style={{ height: '100%', background: '#6b6bff' }} />
       </div>
       <div className="wu-chart__lines">
         <div /><div /><div />

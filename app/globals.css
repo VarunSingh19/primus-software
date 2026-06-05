@@ -8,17 +8,40 @@
 
 /* ===== PRIMUS DESIGN TOKENS ===== */
 :root {
-  --primary: 99 102 241; /* indigo-500 */
-  --primary-dark: 79 70 229; /* indigo-600 */
-  --accent: 6 182 212; /* cyan-500 */
-  --accent-secondary: 34 211 153; /* emerald-500 */
-  --surface-dark: 15 23 42; /* slate-950 */
-  --surface-darker: 10 15 30; /* near black */
-  --text-primary: 241 245 249; /* slate-100 */
-  --text-secondary: 203 213 225; /* slate-400 */
-  --text-muted: 148 163 184; /* slate-500 */
-  --border: 30 41 59; /* slate-800 */
-  --border-light: 51 65 85; /* slate-700 */
+  --bg:             #f0ede8;
+  --black:          #0e0e0e;
+  --blue:           #2b2bff;
+  --card-dark:      #141414;
+  --muted:          #999;
+  --beige-card:     #e8e4de;
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== GRAIN / FILM NOISE ===== */
+@keyframes grain {
+  0%,100% { transform: translate(0,0);     }
+  10%     { transform: translate(-2%,-3%); }
+  20%     { transform: translate(3%,2%);   }
+  30%     { transform: translate(-1%,4%);  }
+  40%     { transform: translate(4%,-1%);  }
+  50%     { transform: translate(-3%,3%);  }
+  60%     { transform: translate(2%,-4%);  }
+  70%     { transform: translate(-4%,1%);  }
+  80%     { transform: translate(3%,3%);   }
+  90%     { transform: translate(-2%,-2%); }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.45;
+  animation: grain 0.8s steps(2) infinite;
 }
 
 /* ===== CUSTOM ANIMATIONS ===== */
@@ -235,13 +258,14 @@
 
 @layer base {
   * {
-    @apply border-slate-800 outline-slate-700/50;
+    border-color: rgba(14,14,14,0.1);
   }
-  
+
   body {
-    @apply bg-slate-950 text-slate-100;
+    background: #f0ede8;
+    color: #0e0e0e;
   }
-  
+
   html {
     @apply font-sans;
   }

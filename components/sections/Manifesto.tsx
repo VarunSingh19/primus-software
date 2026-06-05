@@ -16,6 +16,7 @@ const WORDS = [
   "fintech,", "FMCG,", "and", "high-growth", "startups.",
 ]
 
+
 export function Manifesto() {
   const ref = useRef<HTMLElement>(null)
 
@@ -26,7 +27,7 @@ export function Manifesto() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.mf-word',
-        { color: 'rgba(255,255,255,0.1)' },
+        { color: 'rgba(255,255,255,0.13)' },
         {
           color: 'rgba(255,255,255,0.92)',
           stagger: 0.07,
@@ -46,12 +47,14 @@ export function Manifesto() {
 
   return (
     <section ref={ref} className="mf-section">
-      <p className="mf-eyebrow">About us</p>
-      <p className="mf-text">
-        {WORDS.map((w, i) => (
-          <span key={i} className="mf-word">{w}&nbsp;</span>
-        ))}
-      </p>
+      <div className="mf-section__inner">
+        <p className="mf-eyebrow">About us</p>
+        <p className="mf-text">
+          {WORDS.map((w, i) => (
+            <span key={i} className="mf-word">{w}&nbsp;</span>
+          ))}
+        </p>
+      </div>
     </section>
   )
 }

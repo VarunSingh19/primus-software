@@ -41,7 +41,7 @@ const SERVICES: Service[] = [
     col2: { heading: 'Engineering', items: ['Type-safe code', 'Performance optimisation', 'Caching & CDN', 'Security hardening'] },
     tags: ['Next.js', 'React', 'TypeScript', 'Node.js'],
     href: '/website-webapps',
-    bg: '#6366f1',
+    bg: '#2b2bff',
     fg: '#ffffff',
     accentOpacity: 'rgba(255,255,255,0.06)',
   },

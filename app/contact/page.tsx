@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <>
       <main id="mxd-page-content" className="mxd-page-content inner-page-content">
-        
+
         {/* INNER PAGE HEADLINE */}
         <div className="mxd-section mxd-section-inner-headline padding-s-text-pre-form overflow-hidden">
           <div className="mxd-container grid-container">
@@ -33,9 +33,9 @@ export default function ContactPage() {
                     <div className="mxd-block__content">
                       <div className="mxd-block__inner-headline loading__item">
                         <h1 className="inner-headline__title">
-                          Let&apos;s talk<br/>about your project!
+                          Let&apos;s talk<br />about your project!
                         </h1>
-                        <a className="btn btn-line-headline contact-page-email slide-right-up anim-no-delay" href="mailto:contact@primus.dev" aria-label="Email Primus Software" rel="nofollow">
+                        <a className="btn btn-line-headline contact-page-email slide-right-up anim-no-delay" href="mailto:contact@primusoftware.com" aria-label="Email Primus Software" rel="nofollow">
                           <span className="btn-caption" data-label></span>
                           <i className="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                         </a>
@@ -63,7 +63,7 @@ export default function ContactPage() {
                     <div className="mxd-block__content contact">
                       <div className="mxd-block__inner-form loading__fade">
                         <div className="form-container">
-                          <div className="form__reply centered text-center" id="contact-reply" style={{display: 'none'}}>
+                          <div className="form__reply centered text-center" id="contact-reply" style={{ display: 'none' }}>
                             <i className="ph-fill ph-smiley-wink reply__icon"></i>
                             <p className="reply__title" id="contact-reply-title">Done!</p>
                             <span className="reply__text" id="contact-reply-text">Thanks for your message. We&apos;ll get back as soon as possible.</span>
@@ -157,6 +157,6 @@ export default function ContactPage() {
       <a href="#" className="btn btn-to-top slide-up anim-no-delay" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
         <i className="ph ph-whatsapp-logo"></i>
       </a>
-</>
+    </>
   )
 }

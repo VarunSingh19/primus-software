@@ -15,20 +15,20 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: 'Services',
     children: [
-      { label: 'UI/UX Design',              href: '/ui-ux'                       },
-      { label: 'Websites & Web Apps',       href: '/website-webapps'             },
-      { label: 'eCommerce',                 href: '/ecommerce'                   },
-      { label: 'Brand Identity',            href: '/brand-identity'              },
-      { label: 'Mobile Apps (iOS / Android)',href: '/mobile-apps'                },
-      { label: 'SaaS Product Design',       href: '/saas-product-design'         },
-      { label: 'SEO & Technical Optimization',href: '/performance-seo'           },
-      { label: 'Cloud/DevOps & Hosting',    href: '/cloud-devops-hosting'        },
-      { label: 'ERP/CRM & Portals',         href: '/erp-crm-portals-dashboards' },
+      { label: 'UI/UX Design', href: '/ui-ux' },
+      { label: 'Websites & Web Apps', href: '/website-webapps' },
+      { label: 'eCommerce', href: '/ecommerce' },
+      { label: 'Brand Identity', href: '/brand-identity' },
+      { label: 'Mobile Apps (iOS / Android)', href: '/mobile-apps' },
+      { label: 'SaaS Product Design', href: '/saas-product-design' },
+      { label: 'SEO & Technical Optimization', href: '/performance-seo' },
+      { label: 'Cloud/DevOps & Hosting', href: '/cloud-devops-hosting' },
+      { label: 'ERP/CRM & Portals', href: '/erp-crm-portals-dashboards' },
     ],
   },
-  { label: 'About',    href: '/about'                },
-  { label: 'Careers',  href: 'mailto:contact@primus.dev' },
-  { label: 'Contact',  href: '/contact'              },
+  { label: 'About', href: '/about' },
+  { label: 'Careers', href: 'mailto:contact@primusoftware.com' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 function MagneticBtn({ children }: { children: ReactNode }) {
@@ -128,11 +128,11 @@ function Accordion({
 export function Navbar() {
   const [open, setOpen] = useState(false)
 
-  const panelRef   = useRef<HTMLDivElement>(null)
-  const scrimRef   = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const scrimRef = useRef<HTMLDivElement>(null)
   const captionRef = useRef<HTMLParagraphElement>(null)
-  const itemRefs   = useRef<(HTMLLIElement | null)[]>([])
-  const hbgRef     = useRef<HTMLButtonElement>(null)
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([])
+  const hbgRef = useRef<HTMLButtonElement>(null)
 
   // Initialise panel collapsed
   useEffect(() => {
@@ -144,7 +144,7 @@ export function Navbar() {
   // Animated open / close
   useEffect(() => {
     const panel = panelRef.current
-    const btn   = hbgRef.current
+    const btn = hbgRef.current
     const items = itemRefs.current.filter(Boolean) as HTMLLIElement[]
     if (!panel || !btn) return
 
@@ -155,21 +155,23 @@ export function Navbar() {
         left: 0, top: 0, right: 'auto', width: '100vw', height: '100dvh',
       })
       gsap.timeline()
-        .to(panel, { scale: 1, borderRadius: '0px', duration: 0.72, ease: 'expo.inOut',
-            onComplete: () => { panel.style.overflow = 'auto' } })
+        .to(panel, {
+          scale: 1, borderRadius: '0px', duration: 0.72, ease: 'expo.inOut',
+          onComplete: () => { panel.style.overflow = 'auto' }
+        })
         .to(scrimRef.current, { opacity: 1, pointerEvents: 'auto', duration: 0.3 }, '<0.1')
         .fromTo(captionRef.current,
           { opacity: 0, y: 20, filter: 'blur(8px)' },
-          { opacity: 1, y: 0,  filter: 'blur(0px)', duration: 0.45, ease: 'power3.out' }, '<0.15')
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, ease: 'power3.out' }, '<0.15')
         .fromTo(items,
           { opacity: 0, y: 28, filter: 'blur(6px)' },
-          { opacity: 1, y: 0,  filter: 'blur(0px)', stagger: 0.065, duration: 0.5, ease: 'power3.out' }, '<0.08')
+          { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.065, duration: 0.5, ease: 'power3.out' }, '<0.08')
     } else {
       panel.style.overflow = 'hidden'
       gsap.timeline()
-        .to(items,            { opacity: 0, y: 12, filter: 'blur(4px)', duration: 0.15, stagger: 0.02 })
+        .to(items, { opacity: 0, y: 12, filter: 'blur(4px)', duration: 0.15, stagger: 0.02 })
         .to(captionRef.current, { opacity: 0, filter: 'blur(8px)', duration: 0.15 }, '<')
-        .to(scrimRef.current,   { opacity: 0, pointerEvents: 'none', duration: 0.2 }, '<0.05')
+        .to(scrimRef.current, { opacity: 0, pointerEvents: 'none', duration: 0.2 }, '<0.05')
         .to(panel, { scale: 0, borderRadius: '50%', duration: 0.62, ease: 'expo.inOut' }, '<0.05')
     }
   }, [open])
@@ -191,10 +193,10 @@ export function Navbar() {
     gsap.killTweensOf([panel, scrimRef.current, captionRef.current, ...items])
 
     panel.style.overflow = 'hidden'
-    gsap.set(panel,           { scale: 0, borderRadius: '50%' })
-    gsap.set(scrimRef.current,{ opacity: 0, pointerEvents: 'none' })
+    gsap.set(panel, { scale: 0, borderRadius: '50%' })
+    gsap.set(scrimRef.current, { opacity: 0, pointerEvents: 'none' })
     gsap.set(captionRef.current, { opacity: 0 })
-    gsap.set(items,           { opacity: 0, y: 0, filter: 'none' })
+    gsap.set(items, { opacity: 0, y: 0, filter: 'none' })
 
     document.body.style.overflow = ''
     setOpen(false)
@@ -206,7 +208,7 @@ export function Navbar() {
       <nav className="nb">
         <div className="nb__inner">
           <Link href="/" className="nb__logo" onClick={closeInstant}>
-            Primus
+            Primus Softwares
           </Link>
 
           <div className="nb__right">

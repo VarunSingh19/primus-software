@@ -12,8 +12,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#0f172a',
-  colorScheme: 'dark',
+  themeColor: '#f0ede8',
+  colorScheme: 'light',
 }
 
 export default function RootLayout({
@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className="font-sans antialiased bg-slate-950 text-slate-50">
+    <html lang="en" className="scroll-smooth">
+      <body className="font-sans antialiased">
         <Navbar />
         {children}
         <Footer />

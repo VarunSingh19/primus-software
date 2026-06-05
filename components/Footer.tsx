@@ -3,21 +3,21 @@
 import Link from 'next/link'
 
 const NAV_LINKS = [
-  { href: '/',        label: 'Home'       },
-  { href: '/about',   label: 'About us'   },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About us' },
   { href: '/contact', label: 'Contact us' },
 ]
 
 const SERVICE_LINKS = [
-  { href: '/ui-ux',                        label: 'UI/UX Design'           },
-  { href: '/website-webapps',              label: 'Websites & Web Apps'    },
-  { href: '/ecommerce',                    label: 'eCommerce'              },
-  { href: '/brand-identity',               label: 'Brand Identity'         },
-  { href: '/mobile-apps',                  label: 'Mobile Apps'            },
-  { href: '/saas-product-design',          label: 'SaaS Product Design'    },
-  { href: '/performance-seo',              label: 'Performance & SEO'      },
-  { href: '/cloud-devops-hosting',         label: 'Cloud / DevOps'         },
-  { href: '/erp-crm-portals-dashboards',   label: 'ERP / CRM & Portals'   },
+  { href: '/ui-ux', label: 'UI/UX Design' },
+  { href: '/website-webapps', label: 'Websites & Web Apps' },
+  { href: '/ecommerce', label: 'eCommerce' },
+  { href: '/brand-identity', label: 'Brand Identity' },
+  { href: '/mobile-apps', label: 'Mobile Apps' },
+  { href: '/saas-product-design', label: 'SaaS Product Design' },
+  { href: '/performance-seo', label: 'Performance & SEO' },
+  { href: '/cloud-devops-hosting', label: 'Cloud / DevOps' },
+  { href: '/erp-crm-portals-dashboards', label: 'ERP / CRM & Portals' },
 ]
 
 export function Footer() {
@@ -33,9 +33,9 @@ export function Footer() {
             Mumbai — India.
           </p>
           <p className="ft-contact">
-            <a href="tel:+918108325237">+91 81083 25237</a>
+            <a href="tel:+918108325237">+91 8433808081</a>
             <span>·</span>
-            <a href="mailto:contact@primus.dev">contact@primus.dev</a>
+            <a href="mailto:contact@primusoftware.com">contact@primusoftware.com</a>
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export function Footer() {
       </div>
 
       <div className="ft-bottom">
-        <p>© 2025 Primus Software. All rights reserved.</p>
+        <p>© 2026 Primus Software. All rights reserved.</p>
         <p>Premium UI/UX &amp; Product Engineering</p>
       </div>
     </footer>
