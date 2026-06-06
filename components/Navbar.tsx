@@ -208,13 +208,15 @@ export function Navbar() {
       <nav className="nb">
         <div className="nb__inner">
           <Link href="/" className="nb__logo" onClick={closeInstant}>
-            Primus Softwares
+            PS
           </Link>
 
           <div className="nb__right">
             <MagneticBtn>
               <Link href="/contact" className="nb__cta" onClick={closeInstant}>
-                Start a project →
+                {/* <span className="nb__dot" aria-hidden="true" /> */}
+                Start a project
+                <span className="nb__cta-arrow" aria-hidden="true">→</span>
               </Link>
             </MagneticBtn>
 

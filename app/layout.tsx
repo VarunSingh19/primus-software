@@ -1,10 +1,18 @@
 import { Analytics }   from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Syne } from 'next/font/google'
 import { baseMetadata } from '@/lib/metadata'
 import { Navbar }        from '@/components/Navbar'
 import { Footer }        from '@/components/Footer'
 import { ScrollRefresher } from '@/components/ScrollRefresher'
 import './globals.css'
+
+const syne = Syne({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-syne',
+  display: 'swap',
+})
 
 export const metadata: Metadata = baseMetadata
 
@@ -22,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${syne.variable}`}>
       <body className="font-sans antialiased">
         <Navbar />
         {children}
