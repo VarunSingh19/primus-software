@@ -15,6 +15,8 @@ const FEATURES = [
     body: 'Designed around real users — flows, hierarchy, and micro-interactions tuned to drive conversion and reduce cognitive load.',
     tags: ['Research-driven', 'Accessible', 'WCAG 2.2'],
     accentRgb: '99,102,241',
+    gradFrom: '#3a2d6e',
+    gradTo: '#1c1d3d',
     col: 7,
     visual: 'mockup' as const,
   },
@@ -26,6 +28,8 @@ const FEATURES = [
     body: 'LCP under 1.5 s, CLS near zero, INP instant. Core Web Vitals budgeted and enforced from day one.',
     tags: ['Core Web Vitals', 'SEO', 'Edge CDN'],
     accentRgb: '6,182,212',
+    gradFrom: '#15495c',
+    gradTo: '#15243f',
     col: 5,
     visual: 'score' as const,
   },
@@ -37,6 +41,8 @@ const FEATURES = [
     body: 'Clickable prototypes and usability sessions before a single line ships. Fewer surprises, tighter cycles.',
     tags: ['Figma', 'User tests', 'Rapid iteration'],
     accentRgb: '16,185,129',
+    gradFrom: '#1f5c4c',
+    gradTo: '#163a35',
     col: 4,
     visual: null,
   },
@@ -48,6 +54,8 @@ const FEATURES = [
     body: 'Design system, frontend, backend, infra — one team, total accountability, zero handoff chaos.',
     tags: ['Full-stack', 'CI/CD', 'QA'],
     accentRgb: '245,158,11',
+    gradFrom: '#6b3a1e',
+    gradTo: '#3c2417',
     col: 4,
     visual: null,
   },
@@ -59,6 +67,8 @@ const FEATURES = [
     body: 'ERP, CRM, payments, analytics — stitched with clean APIs and event-driven workflows that surface signal over noise.',
     tags: ['Next.js', 'Stripe', 'AWS', 'Figma'],
     accentRgb: '139,92,246',
+    gradFrom: '#5a2d63',
+    gradTo: '#291c3f',
     col: 4,
     visual: 'stack' as const,
   },
@@ -231,7 +241,12 @@ export function WhyUs() {
             <div
               key={f.id}
               className="why-card"
-              style={{ '--accent': f.accentRgb, gridColumn: `span ${f.col}` } as React.CSSProperties}
+              style={{
+                '--accent': f.accentRgb,
+                '--g1': f.gradFrom,
+                '--g2': f.gradTo,
+                gridColumn: `span ${f.col}`,
+              } as React.CSSProperties}
             >
               {/* ghost decoration number */}
               <span className="why-card__ghost" aria-hidden="true">{f.num}</span>

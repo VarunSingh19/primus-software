@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useRef, useEffect, useCallback, ReactNode } from 'react'
 import gsap from 'gsap'
@@ -208,14 +209,14 @@ export function Navbar() {
       <nav className="nb">
         <div className="nb__inner">
           <Link href="/" className="nb__logo" onClick={closeInstant}>
-            PS
+            <Image src="/logo/logo.png" alt="Primus Software" width={46} height={46} priority />
           </Link>
 
           <div className="nb__right">
             <MagneticBtn>
               <Link href="/contact" className="nb__cta" onClick={closeInstant}>
                 {/* <span className="nb__dot" aria-hidden="true" /> */}
-                Start a project
+                <span className="nb__cta-label">Start a project</span>
                 <span className="nb__cta-arrow" aria-hidden="true">→</span>
               </Link>
             </MagneticBtn>

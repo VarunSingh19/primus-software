@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 
 export const baseMetadata: Metadata = {
-  metadataBase: new URL('https://primus.dev'),
+  metadataBase: new URL('https://primusoftware.com'),
   title: {
     default: 'Primus Software | Premium Design-First Tech Studio',
     template: '%s | Primus Software'
   },
   description: 'Primus Software is a design and engineering studio delivering high-performance websites, mobile apps, eCommerce, SaaS products, and brand identities—fast, accessible, and built to scale.',
   keywords: ['Primus Software', 'design-first tech studio', 'web development', 'UI/UX', 'eCommerce', 'SaaS', 'brand identity', 'digital agency', 'portals', 'ERP', 'CRM', 'SEO'],
-  authors: [{ name: 'Primus Software', url: 'https://primus.dev' }],
+  authors: [{ name: 'Primus Software', url: 'https://primusoftware.com' }],
   creator: 'Primus Software',
   publisher: 'Primus Software',
   robots: {
@@ -25,27 +25,22 @@ export const baseMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://primus.dev',
+    url: 'https://primusoftware.com',
     siteName: 'Primus Software',
-    title: 'Primus Software | Premium Design-First Tech Studio',
-    description: 'High-performance digital products designed and engineered to scale.',
-    images: [{ url: 'https://primus.dev/og-image.png', width: 1200, height: 630, alt: 'Primus Software' }],
+    // title / description intentionally omitted — Next.js falls back to each
+    // page's own `title` / `description`, so shared links show page-specific text.
+    // images is referenced explicitly because nested pages spread this object,
+    // which otherwise blocks Next's auto-merge of the root opengraph-image route.
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Primus Software — Premium Design-First Tech Studio' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Primus Software | Premium Design-First Tech Studio',
-    description: 'High-performance digital products designed and engineered to scale.',
-    images: ['https://primus.dev/og-image.png'],
-  },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-icon.png',
+    images: ['/opengraph-image'],
   },
 }
 
 export const pageMetadata = {
   home: {
-    title: 'Home',
     description: 'Design that moves. Code that scales. Products that win. Premium UI/UX & product engineering for ambitious brands.',
   },
   about: {

@@ -14,7 +14,10 @@ import { baseMetadata, pageMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: pageMetadata.home.title,
+  // No title override here — the homepage inherits `baseMetadata.title.default`
+  // (the full branded title). Overriding it with a plain string like 'Home'
+  // would replace the layout's title template instead of filling it in,
+  // since the root layout and root page share the same route segment.
   description: pageMetadata.home.description,
 }
 
@@ -30,10 +33,6 @@ export default function Page() {
 
       {/* ─── HERO ─── */}
       <section className="hero-section">
-        <div className="hero-blob hero-blob--purple" aria-hidden="true" />
-        <div className="hero-blob hero-blob--cyan" aria-hidden="true" />
-        <div className="hero-blob hero-blob--blue" aria-hidden="true" />
-
         <div className="hero-cols">
           <div className="hero-inner">
             <p className="hero-eyebrow">Mumbai — India · Est. 2022</p>

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function Footer() {
@@ -9,9 +10,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              Primus
-            </h3>
+            <Link href="/" className="inline-flex items-center">
+              <Image src="/logo/logo.png" alt="Primus" width={140} height={40} className="h-9 w-auto" />
+            </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               Premium design-first tech studio building high-performance web apps, eCommerce solutions, and digital experiences.
             </p>

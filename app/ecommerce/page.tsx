@@ -7,7 +7,7 @@ import { ServiceCTA }         from '@/components/service/ServiceCTA'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
-export const metadata: Metadata = { ...baseMetadata, title: 'eCommerce Development | Primus Software', description: 'Scalable ecommerce platforms engineered for revenue.' }
+export const metadata: Metadata = { ...baseMetadata, title: 'eCommerce Development', description: 'Scalable ecommerce platforms engineered for revenue.' }
 
 const DATA: ServicePageData = {
   hero: {

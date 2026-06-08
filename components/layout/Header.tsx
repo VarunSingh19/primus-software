@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -10,8 +11,8 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-          Primus
+        <Link href="/" className="flex items-center">
+          <Image src="/logo/logo.png" alt="Primus" width={140} height={40} className="h-9 w-auto" priority />
         </Link>
 
         {/* Desktop Navigation */}

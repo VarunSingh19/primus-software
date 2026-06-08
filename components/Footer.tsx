@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 const SERVICES = [
@@ -88,7 +89,10 @@ export function Footer() {
           </nav>
 
           <div className="ft-brand-bottom">
-            <Link href="/" className="ft-logo">Primus Softwares</Link>
+            <Link href="/" className="ft-logo">
+              <Image src="/logo/logo.png" alt="" width={44} height={44} />
+              <span className="ft-logo__text">Primus Software</span>
+            </Link>
             <p className="ft-copyright">© {year} All rights reserved.</p>
           </div>
         </div>

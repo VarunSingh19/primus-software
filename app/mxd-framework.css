@@ -135,13 +135,16 @@
 }
 
 .nb__logo {
-  font-family: var(--font-syne, ui-sans-serif), sans-serif;
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: 0.01em;
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
   transition: opacity 0.25s ease;
+}
+
+.nb__logo img {
+  display: block;
+  height: 46px;
+  width: auto;
 }
 
 .nb__logo:hover {
@@ -1067,14 +1070,25 @@
 }
 
 .ft-logo {
-  font-family: var(--font-syne, ui-sans-serif), sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.9);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   text-decoration: none;
-  display: block;
   transition: opacity 0.2s;
+}
+
+.ft-logo img {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+
+.ft-logo__text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .ft-logo:hover {
@@ -1403,8 +1417,31 @@
 }
 
 @media (max-width: 767px) {
+  .nb {
+    margin-top: 10px;
+  }
+
   .nb__inner {
-    padding: 0 1.25rem;
+    padding: 0 0.9rem;
+    margin: 0 0.85rem;
+    background: rgba(10, 10, 14, 0.66);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+  }
+
+  .nb__logo img {
+    height: 38px;
+  }
+
+  .nb__right {
+    gap: 0.5rem;
+  }
+
+  .hbg {
+    width: 40px;
+    height: 40px;
   }
 
   .mp {
@@ -1482,6 +1519,40 @@
 }
 
 @media (max-width: 479px) {
+  /* Collapse the CTA to a compact solid circular button — just the
+     arrow — so the logo isn't crowded. Solid accent fill (the subtle
+     glass background is invisible at this size against the hero) */
+  .nb__cta {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+    border-radius: 50%;
+    background: #2b2bff;
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .nb__cta:hover {
+    background: #4040ff;
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .nb__cta::after {
+    display: none; /* shimmer sweep doesn't read on a tiny circle */
+  }
+
+  .nb__cta-label {
+    display: none;
+  }
+
+  .nb__cta-arrow {
+    font-size: 1.05rem;
+    opacity: 1;
+  }
+
   .va-stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
@@ -1497,50 +1568,6 @@
    ============================================================ */
 
 /* ===== HERO ===== */
-@keyframes blob-float-1 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(30px, -40px) scale(1.05);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.96);
-  }
-}
-
-@keyframes blob-float-2 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  40% {
-    transform: translate(-35px, 30px) scale(1.04);
-  }
-
-  70% {
-    transform: translate(20px, -20px) scale(0.97);
-  }
-}
-
-@keyframes blob-float-3 {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate(25px, 25px) scale(1.06);
-  }
-}
-
 .hero-section {
   position: relative;
   min-height: 100vh;
@@ -1549,42 +1576,7 @@
   justify-content: flex-end;
   overflow: hidden;
   padding-bottom: 5rem;
-  background: #0d1117;
-}
-
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(80px);
-  will-change: transform;
-}
-
-.hero-blob--purple {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.55) 0%, rgba(99, 102, 241, 0.18) 55%, transparent 100%);
-  top: 8%;
-  left: 2%;
-  animation: blob-float-1 14s ease-in-out infinite;
-}
-
-.hero-blob--cyan {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, rgba(6, 182, 212, 0.12) 60%, transparent 100%);
-  top: 4%;
-  right: 6%;
-  animation: blob-float-2 18s ease-in-out infinite;
-}
-
-.hero-blob--blue {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(43, 43, 255, 0.45) 0%, rgba(43, 43, 255, 0.1) 55%, transparent 100%);
-  bottom: 20%;
-  right: 15%;
-  animation: blob-float-3 12s ease-in-out infinite;
+  background: #0e0e0e;
 }
 
 .hero-inner {
@@ -1604,20 +1596,6 @@
   margin-bottom: 1.75rem;
 }
 
-@keyframes hero-gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .hero-headline {
   font-size: clamp(4rem, 10vw, 9rem);
   font-weight: 900;
@@ -1628,12 +1606,7 @@
 
 .hero-line {
   display: block;
-  background: linear-gradient(90deg, #5227FF, #e63ae0, #eb9494, #71f769, #5227FF);
-  background-size: 400% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: hero-gradient-shift 13s ease infinite;
+  color: #fff;
 }
 
 .hero-sub {
@@ -1939,9 +1912,9 @@
   cursor: default;
   background:
     radial-gradient(ellipse 60% 45% at var(--mx, 50%) var(--my, 120%),
-      rgba(var(--accent, 255, 255, 255), 0.08) 0%,
+      rgba(255, 255, 255, 0.10) 0%,
       transparent 70%),
-    #111112;
+    linear-gradient(150deg, var(--g1, #1c1d3d) 0%, var(--g2, #111112) 100%);
   transition:
     border-color 0.4s ease,
     transform 0.55s cubic-bezier(0.03, 0.98, 0.52, 0.99);
@@ -1961,14 +1934,14 @@
   font-weight: 900;
   letter-spacing: -0.06em;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.10);
   pointer-events: none;
   user-select: none;
   transition: color 0.4s ease;
 }
 
 .why-card:hover .why-card__ghost {
-  color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.18);
 }
 
 /* Icon */
@@ -4660,8 +4633,6 @@
     padding-top: calc(var(--nh) + 2.5rem);
     /* clear fixed navbar */
     padding-bottom: 0;
-    overflow: visible;
-    /* let 3D col breathe — blobs are in upper half anyway */
   }
 
   .hero-cols {

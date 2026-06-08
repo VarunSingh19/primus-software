@@ -8,7 +8,7 @@ import { UiUxHero3D }         from '@/components/service/hero3d/UiUxHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
-export const metadata: Metadata = { ...baseMetadata, title: 'UI/UX Design Services | Primus Software', description: 'Research-driven UX and modern UI that converts. Wireframes, prototypes, design systems, and WCAG-compliant delivery.' }
+export const metadata: Metadata = { ...baseMetadata, title: 'UI/UX Design Services', description: 'Research-driven UX and modern UI that converts. Wireframes, prototypes, design systems, and WCAG-compliant delivery.' }
 
 const DATA: ServicePageData = {
   hero: {
