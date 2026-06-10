@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { EcommerceHero3D }     from '@/components/service/hero3d/EcommerceHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['Shopify & headless builds', 'WooCommerce development', 'Custom storefronts', 'B2B portal & wholesale', 'Product catalogue systems', 'Inventory management'],
     col2: ['Payment gateway integration', 'ERP/CRM sync', 'Subscription billing', 'Analytics & tracking', 'Performance optimisation', 'Post-launch support'],
     marqueeItems: ['shopify', 'headless', 'stripe', 'woocommerce', 'checkout', 'performance', 'crm', 'erp'],
+    hero3D: <EcommerceHero3D />,
     accent: '#f59e0b',
   },
   about: {

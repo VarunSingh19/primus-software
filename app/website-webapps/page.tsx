@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { WebAppsHero3D }       from '@/components/service/hero3d/WebAppsHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['Marketing & corporate sites', 'Web portals & dashboards', 'CMS integrations', 'Progressive Web Apps', 'API integrations', 'Headless architecture'],
     col2: ['Type-safe Next.js / React', 'Performance optimisation', 'SEO-ready architecture', 'Caching & CDN setup', 'Security hardening', 'CI/CD pipelines'],
     marqueeItems: ['next.js', 'react', 'typescript', 'tailwind', 'cms', 'seo', 'performance', 'pwa'],
+    hero3D: <WebAppsHero3D />,
     accent: '#06b6d4',
   },
   about: {

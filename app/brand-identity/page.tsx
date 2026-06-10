@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { BrandIdentityHero3D } from '@/components/service/hero3d/BrandIdentityHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['Logo design & variations', 'Typography systems', 'Colour palettes', 'Brand guidelines', 'Icon & illustration', 'Brand voice & tone'],
     col2: ['Web brand application', 'Social media kits', 'Print & collateral', 'Packaging design', 'Pitch deck design', 'Brand refresh & evolution'],
     marqueeItems: ['logo', 'typography', 'colour', 'guidelines', 'identity', 'branding', 'visual', 'system'],
+    hero3D: <BrandIdentityHero3D />,
     accent: '#8b5cf6',
   },
   about: {

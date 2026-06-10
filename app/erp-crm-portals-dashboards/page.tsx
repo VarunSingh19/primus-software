@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { ServiceHero }        from '@/components/service/ServiceHero'
-import { ServiceAbout }       from '@/components/service/ServiceAbout'
+import { ServiceHero } from '@/components/service/ServiceHero'
+import { ServiceAbout } from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
-import { ServiceProcess }     from '@/components/service/ServiceProcess'
-import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { ServiceProcess } from '@/components/service/ServiceProcess'
+import { ServiceCTA } from '@/components/service/ServiceCTA'
+import { ErpCrmHero3D } from '@/components/service/hero3d/ErpCrmHero3D'
 import type { ServicePageData } from '@/components/service/types'
-import { baseMetadata }       from '@/lib/metadata'
+import { baseMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = { ...baseMetadata, title: 'ERP, CRM & Portals', description: 'Custom ERP/CRM integrations, business portals, and data dashboards that connect your systems.' }
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['ERP system integration', 'CRM customisation & setup', 'Custom business portals', 'Role-based dashboards', 'Data visualisation', 'Workflow automation'],
     col2: ['API integration & middleware', 'Real-time data sync', 'Third-party connectors', 'Reporting & analytics', 'User access management', 'Training & documentation'],
     marqueeItems: ['erp', 'crm', 'portals', 'dashboards', 'integration', 'automation', 'data', 'reporting'],
+    hero3D: <ErpCrmHero3D />,
     accent: '#6366f1',
   },
   about: {
@@ -27,11 +29,11 @@ const DATA: ServicePageData = {
     col2: ['ERP integration (SAP, Oracle, Tally)', 'CRM setup (Salesforce, HubSpot)', 'Custom portal development', 'Dashboard & reporting tools', 'Workflow automation', 'Ongoing maintenance'],
   },
   deliverables: [
-    { title: 'ERP Integration', desc: 'Connect your ERP - SAP, Oracle, Tally, or custom - to your web products cleanly and reliably.', tags: ['SAP','Oracle','Tally','Real-time','APIs'], variant: 'dark', span: 7 },
-    { title: 'CRM Customisation', desc: 'Salesforce, HubSpot, or custom CRM workflows tailored precisely to your sales process.', tags: ['Salesforce','HubSpot','Workflows','Automation'], variant: 'indigo', span: 5 },
-    { title: 'Business Portals', desc: 'Role-based portals for vendors, distributors, or customers with real-time data and clean UX.', tags: ['Portals','RBAC','Real-time','Vendor','Customer'], variant: 'tint', span: 12 },
-    { title: 'Data Dashboards', desc: 'Live dashboards with KPIs, charts, and drill-down reporting for every team in the business.', tags: ['KPIs','Charts','Drill-down','Reports','BI'], variant: 'dark', span: 5 },
-    { title: 'API Middleware', desc: 'Clean middleware layer connecting legacy systems to modern web apps via well-documented APIs.', tags: ['REST','GraphQL','Middleware','Legacy','APIs'], variant: 'indigo', span: 7 },
+    { title: 'ERP Integration', desc: 'Connect your ERP - SAP, Oracle, Tally, or custom - to your web products cleanly and reliably.', tags: ['SAP', 'Oracle', 'Tally', 'Real-time', 'APIs'], variant: 'dark', span: 7 },
+    { title: 'CRM Customisation', desc: 'Salesforce, HubSpot, or custom CRM workflows tailored precisely to your sales process.', tags: ['Salesforce', 'HubSpot', 'Workflows', 'Automation'], variant: 'indigo', span: 5 },
+    { title: 'Business Portals', desc: 'Role-based portals for vendors, distributors, or customers with real-time data and clean UX.', tags: ['Portals', 'RBAC', 'Real-time', 'Vendor', 'Customer'], variant: 'tint', span: 12 },
+    { title: 'Data Dashboards', desc: 'Live dashboards with KPIs, charts, and drill-down reporting for every team in the business.', tags: ['KPIs', 'Charts', 'Drill-down', 'Reports', 'BI'], variant: 'dark', span: 5 },
+    { title: 'API Middleware', desc: 'Clean middleware layer connecting legacy systems to modern web apps via well-documented APIs.', tags: ['REST', 'GraphQL', 'Middleware', 'Legacy', 'APIs'], variant: 'indigo', span: 7 },
   ],
   process: {
     heading: `Our ERP/CRM
@@ -45,14 +47,15 @@ process`,
   },
 }
 
+
 export default function ErpCrmPage() {
   return (
     <main className="sp-page">
-      <ServiceHero         data={DATA.hero}         />
-      <ServiceAbout        data={DATA.about}        />
-      <ServiceDeliverables cards={DATA.deliverables}/>
-      <ServiceProcess      data={DATA.process}      />
-      <ServiceCTA          service="ERP/CRM integration"        />
+      <ServiceHero data={DATA.hero} />
+      <ServiceAbout data={DATA.about} />
+      <ServiceDeliverables cards={DATA.deliverables} />
+      <ServiceProcess data={DATA.process} />
+      <ServiceCTA service="ERP/CRM integration" />
     </main>
   )
 }

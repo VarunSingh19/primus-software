@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { SaasProductHero3D }  from '@/components/service/hero3d/SaasProductHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['SaaS architecture & planning', 'Multi-tenant data models', 'Auth & permissions systems', 'Billing & subscription logic', 'Admin & user dashboards', 'API design & documentation'],
     col2: ['Product UI/UX design', 'Component library & design system', 'Onboarding flows', 'Analytics & telemetry', 'Growth tooling', 'Reliability & SLOs'],
     marqueeItems: ['saas', 'product', 'architecture', 'multi-tenant', 'billing', 'dashboards', 'api', 'scale'],
+    hero3D: <SaasProductHero3D />,
     accent: '#6366f1',
   },
   about: {

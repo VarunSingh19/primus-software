@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { PerformanceSeoHero3D } from '@/components/service/hero3d/PerformanceSeoHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['Technical SEO audits', 'Core Web Vitals (LCP/CLS/INP)', 'On-page optimisation', 'Schema & structured data', 'Crawl & indexation fixes', 'Site architecture optimisation'],
     col2: ['Page speed optimisation', 'Image optimisation & CDN', 'Server-side rendering', 'Caching strategies', 'Internal linking', 'SEO monitoring & reporting'],
     marqueeItems: ['seo', 'performance', 'core web vitals', 'schema', 'speed', 'rankings', 'technical', 'crawl'],
+    hero3D: <PerformanceSeoHero3D />,
     accent: '#22d3ee',
   },
   about: {

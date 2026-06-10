@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
-import { ServiceHero }        from '@/components/service/ServiceHero'
-import { ServiceAbout }       from '@/components/service/ServiceAbout'
+import { ServiceHero } from '@/components/service/ServiceHero'
+import { ServiceAbout } from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
-import { ServiceProcess }     from '@/components/service/ServiceProcess'
-import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { ServiceProcess } from '@/components/service/ServiceProcess'
+import { ServiceCTA } from '@/components/service/ServiceCTA'
+import { CloudDevOpsHero3D } from '@/components/service/hero3d/CloudDevOpsHero3D'
 import type { ServicePageData } from '@/components/service/types'
-import { baseMetadata }       from '@/lib/metadata'
+import { baseMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = { ...baseMetadata, title: 'Cloud, DevOps & Hosting', description: 'Cloud infrastructure, CI/CD pipelines, and DevOps that keep your product fast, reliable, and secure.' }
+
 
 const DATA: ServicePageData = {
   hero: {
@@ -18,6 +20,7 @@ const DATA: ServicePageData = {
     col1: ['AWS / GCP / Azure setup', 'Vercel & Netlify deployments', 'Docker & Kubernetes', 'CI/CD pipeline setup', 'Database provisioning', 'Infrastructure as Code'],
     col2: ['Zero-downtime deployments', 'SSL & security hardening', 'Auto-scaling configuration', 'Monitoring & alerting', 'Backup & disaster recovery', 'Cost optimisation'],
     marqueeItems: ['aws', 'gcp', 'docker', 'kubernetes', 'ci/cd', 'vercel', 'devops', 'infrastructure'],
+    hero3D: <CloudDevOpsHero3D />,
     accent: '#f59e0b',
   },
   about: {
@@ -27,11 +30,11 @@ const DATA: ServicePageData = {
     col2: ['AWS / GCP / Azure provisioning', 'Docker & Kubernetes orchestration', 'CI/CD pipelines (GitHub Actions)', 'Monitoring & alerting (Datadog)', 'Backup & disaster recovery', 'Database & CDN optimisation'],
   },
   deliverables: [
-    { title: 'Cloud Infrastructure', desc: 'AWS, GCP, or Azure environments configured for your scale, region, and budget - built to last.', tags: ['AWS','GCP','Azure','IaC','Terraform'], variant: 'dark', span: 7 },
-    { title: 'CI/CD Pipelines', desc: 'Automated build, test, and deploy workflows - ship with confidence, every single time.', tags: ['GitHub Actions','CI/CD','Automation','Testing'], variant: 'indigo', span: 5 },
-    { title: 'Containerisation', desc: 'Docker and Kubernetes for portable, scalable, environment-consistent deployments everywhere.', tags: ['Docker','Kubernetes','Helm','Containers'], variant: 'tint', span: 12 },
-    { title: 'Monitoring & Alerting', desc: 'Datadog, Grafana, or CloudWatch dashboards and incident alerting so you know before users do.', tags: ['Datadog','Grafana','Alerts','Observability'], variant: 'dark', span: 5 },
-    { title: 'Cost Optimisation', desc: 'Right-sizing, reserved instances, and spend alerts to keep your cloud bill predictable and lean.', tags: ['Cost','Right-sizing','Reserved','Savings'], variant: 'indigo', span: 7 },
+    { title: 'Cloud Infrastructure', desc: 'AWS, GCP, or Azure environments configured for your scale, region, and budget - built to last.', tags: ['AWS', 'GCP', 'Azure', 'IaC', 'Terraform'], variant: 'dark', span: 7 },
+    { title: 'CI/CD Pipelines', desc: 'Automated build, test, and deploy workflows - ship with confidence, every single time.', tags: ['GitHub Actions', 'CI/CD', 'Automation', 'Testing'], variant: 'indigo', span: 5 },
+    { title: 'Containerisation', desc: 'Docker and Kubernetes for portable, scalable, environment-consistent deployments everywhere.', tags: ['Docker', 'Kubernetes', 'Helm', 'Containers'], variant: 'tint', span: 12 },
+    { title: 'Monitoring & Alerting', desc: 'Datadog, Grafana, or CloudWatch dashboards and incident alerting so you know before users do.', tags: ['Datadog', 'Grafana', 'Alerts', 'Observability'], variant: 'dark', span: 5 },
+    { title: 'Cost Optimisation', desc: 'Right-sizing, reserved instances, and spend alerts to keep your cloud bill predictable and lean.', tags: ['Cost', 'Right-sizing', 'Reserved', 'Savings'], variant: 'indigo', span: 7 },
   ],
   process: {
     heading: `Our DevOps
@@ -48,11 +51,11 @@ process`,
 export default function CloudDevOpsPage() {
   return (
     <main className="sp-page">
-      <ServiceHero         data={DATA.hero}         />
-      <ServiceAbout        data={DATA.about}        />
-      <ServiceDeliverables cards={DATA.deliverables}/>
-      <ServiceProcess      data={DATA.process}      />
-      <ServiceCTA          service="cloud & DevOps"        />
+      <ServiceHero data={DATA.hero} />
+      <ServiceAbout data={DATA.about} />
+      <ServiceDeliverables cards={DATA.deliverables} />
+      <ServiceProcess data={DATA.process} />
+      <ServiceCTA service="cloud & DevOps" />
     </main>
   )
 }

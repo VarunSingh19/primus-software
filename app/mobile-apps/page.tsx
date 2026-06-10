@@ -4,6 +4,7 @@ import { ServiceAbout }       from '@/components/service/ServiceAbout'
 import { ServiceDeliverables } from '@/components/service/ServiceDeliverables'
 import { ServiceProcess }     from '@/components/service/ServiceProcess'
 import { ServiceCTA }         from '@/components/service/ServiceCTA'
+import { MobileAppsHero3D }   from '@/components/service/hero3d/MobileAppsHero3D'
 import type { ServicePageData } from '@/components/service/types'
 import { baseMetadata }       from '@/lib/metadata'
 
@@ -18,6 +19,7 @@ const DATA: ServicePageData = {
     col1: ['iOS app development', 'Android app development', 'React Native cross-platform', 'Flutter development', 'App store submission', 'Push notifications'],
     col2: ['UI/UX for mobile', 'Offline-first architecture', 'REST/GraphQL integration', 'Authentication & security', 'Analytics & crash reporting', 'App maintenance & updates'],
     marqueeItems: ['ios', 'android', 'react native', 'flutter', 'mobile', 'apps', 'push', 'offline'],
+    hero3D: <MobileAppsHero3D />,
     accent: '#10b981',
   },
   about: {
