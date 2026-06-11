@@ -11,7 +11,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center">
-              <Image src="/logo/logo.png" alt="Primus" width={140} height={40} className="h-9 w-auto" />
+              <Image src="https://res.cloudinary.com/dozdgvgbt/image/upload/q_auto/f_auto/v1781196202/ChatGPT_Image_Jun_8_2026_10_26_16_PM_wha67q.png" alt="Primus" width={140} height={40} className="h-9 w-auto" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               Premium design-first tech studio building high-performance web apps, eCommerce solutions, and digital experiences.
@@ -57,7 +57,7 @@ export function Footer() {
             <p className="text-slate-400 text-sm">
               © {currentYear} Primus Software. All rights reserved.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex items-center gap-4">
               <a href="/" className="text-slate-400 hover:text-slate-200 transition-colors">

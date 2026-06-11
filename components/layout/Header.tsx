@@ -12,7 +12,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Image src="/logo/logo.png" alt="Primus" width={140} height={40} className="h-9 w-auto" priority />
+          <Image src="https://res.cloudinary.com/dozdgvgbt/image/upload/q_auto/f_auto/v1781196202/ChatGPT_Image_Jun_8_2026_10_26_16_PM_wha67q.png" alt="Primus" width={140} height={40} className="h-9 w-auto" priority />
         </Link>
 
         {/* Desktop Navigation */}
@@ -29,8 +29,8 @@ export function Header() {
         </nav>
 
         {/* CTA Button */}
-        <Link 
-          href="/contact" 
+        <Link
+          href="/contact"
           className="hidden sm:inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium"
         >
           Start Now
@@ -38,7 +38,7 @@ export function Header() {
         </Link>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2 hover:bg-slate-800 rounded-lg transition-colors"
         >
@@ -58,8 +58,8 @@ export function Header() {
           <Link href="/contact" className="block text-slate-300 hover:text-slate-100 transition-colors">
             Contact
           </Link>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className="block px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all duration-300 font-medium text-center"
           >
             Start Now

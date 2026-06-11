@@ -5,6 +5,7 @@ import { baseMetadata } from '@/lib/metadata'
 import { Navbar }        from '@/components/Navbar'
 import { Footer }        from '@/components/Footer'
 import { ScrollRefresher } from '@/components/ScrollRefresher'
+import { PhosphorIcons } from '@/components/PhosphorIcons'
 import './globals.css'
 
 const syne = Syne({
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Footer />
         <ScrollRefresher />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        <PhosphorIcons />
       </body>
     </html>
   )

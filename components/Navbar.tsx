@@ -209,7 +209,7 @@ export function Navbar() {
       <nav className="nb">
         <div className="nb__inner">
           <Link href="/" className="nb__logo" onClick={closeInstant}>
-            <Image src="/logo/logo.png" alt="Primus Software" width={46} height={46} priority />
+            <Image src="https://res.cloudinary.com/dozdgvgbt/image/upload/q_auto/f_auto/v1781196202/ChatGPT_Image_Jun_8_2026_10_26_16_PM_wha67q.png" alt="Primus Software" width={46} height={46} priority />
           </Link>
 
           <div className="nb__right">

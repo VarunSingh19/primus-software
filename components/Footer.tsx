@@ -4,22 +4,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const SERVICES = [
-  { label: 'UI/UX Design',                href: '/ui-ux' },
-  { label: 'Websites & Web Apps',          href: '/website-webapps' },
-  { label: 'eCommerce',                    href: '/ecommerce' },
-  { label: 'Brand Identity',               href: '/brand-identity' },
-  { label: 'Mobile Apps (iOS / Android)',  href: '/mobile-apps' },
-  { label: 'SaaS Product Design',          href: '/saas-product-design' },
+  { label: 'UI/UX Design', href: '/ui-ux' },
+  { label: 'Websites & Web Apps', href: '/website-webapps' },
+  { label: 'eCommerce', href: '/ecommerce' },
+  { label: 'Brand Identity', href: '/brand-identity' },
+  { label: 'Mobile Apps (iOS / Android)', href: '/mobile-apps' },
+  { label: 'SaaS Product Design', href: '/saas-product-design' },
   { label: 'SEO & Technical Optimization', href: '/performance-seo' },
-  { label: 'Cloud/DevOps & Hosting',       href: '/cloud-devops-hosting' },
-  { label: 'ERP/CRM & Portals',           href: '/erp-crm-portals-dashboards' },
+  { label: 'Cloud/DevOps & Hosting', href: '/cloud-devops-hosting' },
+  { label: 'ERP/CRM & Portals', href: '/erp-crm-portals-dashboards' },
 ]
 
 const NAV_LINKS = [
-  { label: 'Home',       href: '/' },
-  { label: 'About us',   href: '/about' },
-  { label: 'FAQ',        href: '/faq' },
-  { label: 'Contact',    href: '/contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About us', href: '/about' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 const SOCIALS = [
@@ -90,7 +90,7 @@ export function Footer() {
 
           <div className="ft-brand-bottom">
             <Link href="/" className="ft-logo">
-              <Image src="/logo/logo.png" alt="" width={44} height={44} />
+              <Image src="https://res.cloudinary.com/dozdgvgbt/image/upload/q_auto/f_auto/v1781196202/ChatGPT_Image_Jun_8_2026_10_26_16_PM_wha67q.png" alt="" width={44} height={44} />
               <span className="ft-logo__text">Primus Software</span>
             </Link>
             <p className="ft-copyright">© {year} All rights reserved.</p>
