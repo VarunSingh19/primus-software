@@ -4,29 +4,29 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
 const SWATCHES = [
-  { bg: '#6366f1', label: 'Primary'   },
-  { bg: '#818cf8', label: '400'       },
-  { bg: '#06b6d4', label: 'Accent'    },
-  { bg: '#10b981', label: 'Success'   },
-  { bg: '#f59e0b', label: 'Warning'   },
-  { bg: '#ef4444', label: 'Error'     },
+  { bg: '#6366f1', label: 'Primary' },
+  { bg: '#818cf8', label: '400' },
+  { bg: '#06b6d4', label: 'Accent' },
+  { bg: '#10b981', label: 'Success' },
+  { bg: '#f59e0b', label: 'Warning' },
+  { bg: '#ef4444', label: 'Error' },
 ]
 
 const BADGES = [
-  { label: 'UX Research',   pos: 'tl', z: 90  },
-  { label: 'Figma',         pos: 'tr', z: 70  },
-  { label: 'Prototyping',   pos: 'bl', z: 80  },
-  { label: 'WCAG 2.2',      pos: 'br', z: 60  },
+  { label: 'UX Research', pos: 'tl', z: 90 },
+  { label: 'Figma', pos: 'tr', z: 70 },
+  { label: 'Prototyping', pos: 'bl', z: 80 },
+  { label: 'WCAG 2.2', pos: 'br', z: 60 },
 ]
 
 export function UiUxHero3D() {
-  const wrapRef  = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<HTMLDivElement>(null)
   const [activeBtn, setActiveBtn] = useState<string | null>(null)
-  const [hovered, setHovered]     = useState(false)
+  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    const wrap  = wrapRef.current
+    const wrap = wrapRef.current
     const scene = sceneRef.current
     if (!wrap || !scene) return
 
@@ -37,9 +37,9 @@ export function UiUxHero3D() {
 
     /* mouse tilt */
     const onMove = (e: MouseEvent) => {
-      const r  = wrap.getBoundingClientRect()
-      const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2)
-      const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2)
+      const r = wrap.getBoundingClientRect()
+      const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2)
+      const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2)
       gsap.to(scene, {
         rotateY: dx * 20,
         rotateX: -dy * 14,
@@ -87,12 +87,12 @@ export function UiUxHero3D() {
           {/* Chrome */}
           <div className="u3d-chrome">
             <div className="u3d-dots">
-              <span className="dot-r"/><span className="dot-y"/><span className="dot-g"/>
+              <span className="dot-r" /><span className="dot-y" /><span className="dot-g" />
             </div>
             <div className="u3d-tab">
               <svg width="10" height="10" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                <rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/>
-                <rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/>
+                <rect x="3" y="3" width="6" height="6" rx="1" /><rect x="11" y="3" width="6" height="6" rx="1" />
+                <rect x="3" y="11" width="6" height="6" rx="1" /><rect x="11" y="11" width="6" height="6" rx="1" />
               </svg>
               Components
             </div>
@@ -102,7 +102,7 @@ export function UiUxHero3D() {
           {/* Search bar */}
           <div className="u3d-search">
             <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.5}>
-              <circle cx="9" cy="9" r="6"/><path d="M15 15l3 3" strokeLinecap="round"/>
+              <circle cx="9" cy="9" r="6" /><path d="M15 15l3 3" strokeLinecap="round" />
             </svg>
             Search components…
           </div>
@@ -112,9 +112,9 @@ export function UiUxHero3D() {
             <p className="u3d-sect-label">Buttons</p>
             <div className="u3d-btn-row">
               {[
-                { label: 'Primary',   cls: 'fill',  key: 'p' },
+                { label: 'Primary', cls: 'fill', key: 'p' },
                 { label: 'Secondary', cls: 'ghost', key: 's' },
-                { label: 'Danger',    cls: 'red',   key: 'd' },
+                { label: 'Danger', cls: 'red', key: 'd' },
               ].map(({ label, cls, key }) => (
                 <button
                   key={key}
@@ -146,7 +146,7 @@ export function UiUxHero3D() {
 
           {/* Section: Form controls */}
           <div className="u3d-section u3d-section--row">
-            <div className="u3d-input">user@primus.dev</div>
+            <div className="u3d-input">user@primusoftware.com</div>
             <div className="u3d-toggles">
               <span className="u3d-tog on" />
               <span className="u3d-tog" />
@@ -157,14 +157,14 @@ export function UiUxHero3D() {
           <div className="u3d-section">
             <p className="u3d-sect-label">Typography</p>
             <div className="u3d-type-row">
-              <span style={{ fontSize:'1.6rem', fontWeight:800, letterSpacing:'-0.04em', lineHeight:1 }}>Aa</span>
+              <span style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1 }}>Aa</span>
               <div className="u3d-type-meta">
                 <span>Inter Display</span>
-                <span style={{ opacity:0.4 }}>800 / -0.04em</span>
+                <span style={{ opacity: 0.4 }}>800 / -0.04em</span>
               </div>
               <div className="u3d-type-steps">
-                {[800,600,400,300].map(w => (
-                  <span key={w} style={{ fontWeight: w, opacity: 0.3 + w/2000 }}>A</span>
+                {[800, 600, 400, 300].map(w => (
+                  <span key={w} style={{ fontWeight: w, opacity: 0.3 + w / 2000 }}>A</span>
                 ))}
               </div>
             </div>
@@ -175,7 +175,7 @@ export function UiUxHero3D() {
         {/* ── Floating cursor decoration ── */}
         <div className={`u3d-cursor${hovered ? ' hov' : ''}`}>
           <svg width="18" height="18" viewBox="0 0 20 20" fill="white">
-            <path d="M5 2l13 8-7 2-3 7z"/>
+            <path d="M5 2l13 8-7 2-3 7z" />
           </svg>
           <span>Pointer</span>
         </div>

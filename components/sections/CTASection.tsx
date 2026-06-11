@@ -55,7 +55,7 @@ export function CTASection() {
             </Link>
             <button
               onClick={() => {
-                const email = 'hello@primus.dev'
+                const email = 'hello@primusoftware.com'
                 window.location.href = `mailto:${email}`
               }}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-800 rounded-lg transition-all duration-300 font-semibold btn-magnetic"
@@ -70,11 +70,11 @@ export function CTASection() {
             <p className="text-slate-400 mb-4">Or reach us directly:</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a
-                href="mailto:hello@primus.dev"
+                href="mailto:hello@primusoftware.com"
                 className="flex items-center justify-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
               >
                 <i className="ph-bold ph-envelope"></i>
-                hello@primus.dev
+                hello@primusoftware.com
               </a>
               <a
                 href="tel:+919876543210"

@@ -2,257 +2,246 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+/* ════════════════════════════════════════════════════════════════
+   HomeHero3D — "The Canvas"
+   A live design canvas that constructs itself, compiles into a real
+   browser, and goes green — then loops. One GSAP master timeline
+   drives the whole ~8s cycle; mouse-tilt parallax runs independently.
+   Geometry below is shared between the SVG wireframe (draw phase) and
+   the HTML fills (colour phase) so the two stay pixel-aligned.
+═════════════════════════════════════════════════════════════════ */
 
-/* ─── Static data ─── */
-const GRID_COLS = 9
-const GRID_ROWS = 7
+const ART_W = 380
+const ART_H = 300
 
-const TECH = ['Next.js', 'TypeScript', 'Figma', 'Supabase', 'Vercel', 'Stripe']
+type Kind = 'logo' | 'nav' | 'navBtn' | 'headline' | 'sub' | 'cta' | 'card'
 
-const KPIS = [
-  { value: '50+', label: 'Projects', raw: 50 },
-  { value: '98%', label: 'Retained', raw: 98 },
-  { value: '4×',  label: 'Faster',   raw: 4  },
+type Block = { id: string; x: number; y: number; w: number; h: number; r: number; kind: Kind }
+
+/* The mini landing page that builds itself (artboard coordinate space) */
+const BLOCKS: Block[] = [
+  /* navbar */
+  { id: 'logo', x: 20, y: 18, w: 24, h: 24, r: 7, kind: 'logo' },
+  { id: 'nav1', x: 206, y: 27, w: 30, h: 6, r: 3, kind: 'nav' },
+  { id: 'nav2', x: 246, y: 27, w: 30, h: 6, r: 3, kind: 'nav' },
+  { id: 'navBtn', x: 296, y: 18, w: 64, h: 24, r: 12, kind: 'navBtn' },
+  /* hero */
+  { id: 'h1', x: 20, y: 80, w: 232, h: 20, r: 5, kind: 'headline' },
+  { id: 'h2', x: 20, y: 108, w: 168, h: 20, r: 5, kind: 'headline' },
+  { id: 's1', x: 20, y: 142, w: 250, h: 7, r: 3, kind: 'sub' },
+  { id: 's2', x: 20, y: 156, w: 206, h: 7, r: 3, kind: 'sub' },
+  { id: 'cta', x: 20, y: 180, w: 120, h: 34, r: 9, kind: 'cta' },
+  /* card row */
+  { id: 'c1', x: 20, y: 232, w: 104, h: 52, r: 9, kind: 'card' },
+  { id: 'c2', x: 138, y: 232, w: 104, h: 52, r: 9, kind: 'card' },
+  { id: 'c3', x: 256, y: 232, w: 104, h: 52, r: 9, kind: 'card' },
 ]
+
+const perimeter = (b: Block) => 2 * (b.w + b.h) + 16 /* +slack for rounded corners */
 
 const CHIPS = [
-  {
-    icon: '●', label: 'Deployed',
-    color: '#10b981',
-    style: { top: '14px', right: '46px' } as React.CSSProperties,
-  },
-  {
-    icon: '↑', label: '+12% CVR',
-    color: '#6366f1',
-    style: { bottom: '44px', left: '24px' } as React.CSSProperties,
-  },
-  {
-    icon: '⚡', label: '1.2s LCP',
-    color: '#f59e0b',
-    style: { top: '148px', right: '-2px' } as React.CSSProperties,
-  },
+  { id: 'ok', label: 'Deployed', dot: '#10b981', style: { top: '54px', right: '14px' } as React.CSSProperties },
+  { id: 'indigo', label: '98 Lighthouse', dot: '#6366f1', style: { bottom: '70px', left: '22px' } as React.CSSProperties },
+  { id: 'amber', label: '1.2s LCP', dot: '#f59e0b', style: { top: '198px', right: '0px' } as React.CSSProperties },
 ]
 
-/* Approximate path length for Phase 3 stroke-dashoffset animation */
-const SPARK_D   = 'M0,36 L18,28 L36,31 L54,18 L72,22 L90,12 L108,16 L126,9 L144,12 L164,6'
-const SPARK_LEN = 340 /* px, used as dasharray value */
-
-/* ─── Mini perf ring (inner sub-component) ─── */
-function PerfMini() {
-  const r = 28
-  const c = 2 * Math.PI * r
-  return (
-    <div className="h3d-perf-ring">
-      <svg viewBox="0 0 64 64" fill="none" width="64" height="64" aria-hidden="true">
-        <circle cx="32" cy="32" r={r} stroke="rgba(255,255,255,0.08)" strokeWidth="5" />
-        <circle
-          cx="32" cy="32" r={r}
-          stroke="#06b6d4"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeDasharray={String(c)}
-          strokeDashoffset={String(c * 0.03)}
-          style={{ transform: 'rotate(-90deg)', transformOrigin: '32px 32px' }}
-        />
-      </svg>
-      <div className="h3d-perf-ring__inner">
-        <span className="h3d-perf-ring__num">97</span>
-      </div>
-    </div>
-  )
+/* Simple character-typing into an element (no TextPlugin dependency) */
+function typeInto(el: Element | null, str: string) {
+  if (!el) return
+  const proxy = { n: 0 }
+  gsap.to(proxy, {
+    n: str.length,
+    duration: Math.max(0.25, str.length * 0.032),
+    ease: 'none',
+    onUpdate() { el.textContent = str.slice(0, Math.round(proxy.n)) },
+  })
 }
 
-/* ─── Main export ─── */
 export function HomeHero3D() {
-  const wrapRef  = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<HTMLDivElement>(null)
-  /* chip refs exposed for Phase 2 magnetic spring */
-  const chipRefs = useRef<(HTMLDivElement | null)[]>([null, null, null])
 
   useEffect(() => {
-    const wrap  = wrapRef.current
+    const wrap = wrapRef.current
     const scene = sceneRef.current
     if (!wrap || !scene) return
 
-    /* Target only direct children (.h3d-layer) — 7 layers in DOM order */
-    const layers = Array.from(
-      scene.querySelectorAll<HTMLElement>(':scope > .h3d-layer'),
-    )
-
-    /* Hide immediately (prevents SSR flash) */
-    gsap.set(layers, { autoAlpha: 0, y: 28 })
+    const q = gsap.utils.selector(scene)
+    const stage = q('.hc-stage')[0]
+    const wires = q('.hc-wire')
+    const fills = q('.hc-fill')
+    const chips = q('.hc-chip')
+    const cursor = q('.hc-cursor')[0]
+    const urlText = q('.hc-url-text')[0]
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrap,
-          /* 'top bottom' fires as soon as any part of the 3D enters the
-             viewport — reliable on mobile where the hero stacks vertically */
-          start: 'top bottom',
-          once: true,
-        },
-      })
+      /* ── Reduced motion: paint the finished, compiled state and stop ── */
+      if (reduce) {
+        gsap.set(stage, { autoAlpha: 1, rotateY: -13, rotateX: 7, z: 30 })
+        gsap.set('.hc-paper', { autoAlpha: 1 })
+        gsap.set('.hc-grid', { autoAlpha: 0.4, scale: 1 })
+        gsap.set(wires, { autoAlpha: 0 })
+        gsap.set(fills, { autoAlpha: 1, y: 0 })
+        gsap.set('.hc-frame', { autoAlpha: 1 })
+        gsap.set('.hc-chrome', { autoAlpha: 1, yPercent: 0 })
+        gsap.set('.hc-url-dot', { backgroundColor: '#10b981' })
+        gsap.set('.hc-status', { autoAlpha: 1, scale: 1 })
+        gsap.set(chips, { autoAlpha: 1, scale: 1, y: 0 })
+        gsap.set(cursor, { autoAlpha: 0 })
+        if (urlText) urlText.textContent = 'https://primusoftware.com'
+        return
+      }
 
-      tl.to(layers, {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.11,
-        duration: 0.8,
-        ease: 'power3.out',
-        onComplete() {
-          /* ── Phase 3 callbacks go here ──
-           *   • count-up for .h3d-kpi-num elements
-           *   • stroke-dashoffset draw on .h3d-spark-line
-           *   • width transition on .h3d-prog-fill
-           *   • cursor actor GSAP loop
-           */
-        },
-      })
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.45, defaults: { ease: 'power2.out' } })
+
+      /* ══ RESET (re-applied at the head of every loop) ══ */
+      tl.set(stage, { autoAlpha: 0, rotateY: 0, rotateX: 0, z: 0 })
+        .set('.hc-paper', { autoAlpha: 0 })
+        .set('.hc-grid', { autoAlpha: 0, scale: 0.94 })
+        .set(cursor, { autoAlpha: 0, x: 34, y: 24 })
+        .set(wires, { autoAlpha: 1, strokeDashoffset: (i, el) => Number((el as HTMLElement).dataset.peri) })
+        .set(fills, { autoAlpha: 0, y: 6 })
+        .set('.hc-frame', { autoAlpha: 0 })
+        .set('.hc-chrome', { autoAlpha: 0, yPercent: -120 })
+        .set('.hc-url-dot', { backgroundColor: 'rgba(255,255,255,0.25)' })
+        .set('.hc-status', { autoAlpha: 0, scale: 0.7 })
+        .set(chips, { autoAlpha: 0, scale: 0.6, y: 10 })
+        .call(() => { if (urlText) urlText.textContent = '' })
+
+      /* ══ PHASE 0 — blank canvas + grid + cursor (0 → 1.0s) ══ */
+      tl.to(stage, { autoAlpha: 1, duration: 0.5 }, 0)
+        .to('.hc-grid', { autoAlpha: 1, scale: 1, duration: 0.7 }, 0.1)
+        .to(cursor, { autoAlpha: 1, duration: 0.3 }, 0.55)
+
+      /* ══ PHASE 1 — wireframe sketches itself, cursor leads (1.0 → 3.1s) ══ */
+      tl.to(cursor, { x: 308, y: 30, duration: 0.45 }, 1.0)
+        .to(wires, { strokeDashoffset: 0, duration: 0.24, stagger: 0.115 }, 1.05)
+        .to(cursor, { x: 90, y: 92, duration: 0.5 }, 1.75)
+        .to(cursor, { x: 70, y: 196, duration: 0.5 }, 2.45)
+
+      /* ══ PHASE 2 — colour washes in, type snaps into place (3.1 → 4.9s) ══ */
+      tl.to('.hc-paper', { autoAlpha: 1, duration: 0.6 }, 3.1)
+        .to(cursor, { autoAlpha: 0, duration: 0.3 }, 3.15)
+        .to(wires, { autoAlpha: 0, duration: 0.5, stagger: 0.025 }, 3.25)
+        .to(fills, { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.06 }, 3.4)
+        .fromTo('.hc-fill--cta', { scale: 0.88 }, { scale: 1, duration: 0.45, ease: 'back.out(2.2)' }, 4.05)
+
+      /* ══ PHASE 3 — compile: tilt, browser wraps, URL resolves, goes green (4.9 → 6.8s) ══ */
+      tl.to(stage, { rotateY: -13, rotateX: 7, z: 30, duration: 0.95, ease: 'power3.inOut' }, 4.95)
+        .to('.hc-frame', { autoAlpha: 1, duration: 0.4 }, 5.15)
+        .to('.hc-chrome', { autoAlpha: 1, yPercent: 0, duration: 0.5, ease: 'power3.out' }, 5.25)
+        .call(typeInto, [urlText, 'localhost:3000'], 5.55)
+        .call(typeInto, [urlText, 'https://primusoftware.com'], 6.25)
+        .to('.hc-url-dot', { backgroundColor: '#10b981', duration: 0.3 }, 6.7)
+        .to('.hc-status', { autoAlpha: 1, scale: 1, duration: 0.4, ease: 'back.out(2.2)' }, 6.7)
+
+      /* ══ PHASE 4 — live: metric chips pop in closest to camera (6.9 → 7.6s) ══ */
+      tl.to(chips, { autoAlpha: 1, scale: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'back.out(1.7)' }, 6.95)
+
+      /* ══ RESOLVE — hold, then gently fade back to blank ══ */
+      tl.to([stage, ...chips], { autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, 8.4)
+
+      /* ── Mouse-tilt parallax (independent of the build timeline) ── */
+      const onMove = (e: MouseEvent) => {
+        const r = wrap.getBoundingClientRect()
+        const dx = (e.clientX - r.left) / r.width - 0.5
+        const dy = (e.clientY - r.top) / r.height - 0.5
+        gsap.to(scene, { rotateY: dx * 14, rotateX: -dy * 10, duration: 0.5, ease: 'power2.out' })
+      }
+      const onLeave = () => gsap.to(scene, { rotateY: 0, rotateX: 0, duration: 1.1, ease: 'elastic.out(1, 0.5)' })
+      wrap.addEventListener('mousemove', onMove)
+      wrap.addEventListener('mouseleave', onLeave)
+
+      return () => {
+        wrap.removeEventListener('mousemove', onMove)
+        wrap.removeEventListener('mouseleave', onLeave)
+      }
     }, wrap)
 
-    /* Refresh ScrollTrigger after the next frame so positions are calculated
-       against the final stacked layout on mobile, not the initial paint. */
-    const raf = requestAnimationFrame(() => ScrollTrigger.refresh())
-
-    return () => {
-      cancelAnimationFrame(raf)
-      ctx.revert()
-    }
+    return () => ctx.revert()
   }, [])
 
   return (
-    <div ref={wrapRef} className="h3d-wrap">
-      <div ref={sceneRef} className="h3d-scene">
+    <div ref={wrapRef} className="hc-wrap" aria-hidden="true">
+      <div ref={sceneRef} className="hc-scene">
 
-        {/* ══ Layer 0: Dot grid · translateZ(-80px) ══ */}
-        <div className="h3d-layer h3d-dot-grid" aria-hidden="true">
-          {Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => (
-            <span key={i} className="h3d-dot" data-i={i} />
-          ))}
-        </div>
+        {/* ══ Stage — canvas + browser frame (gets the compile tilt) ══ */}
+        <div className="hc-stage">
 
-        {/* ══ Layer 1: Glow corona · translateZ(-40px) ══ */}
-        <div className="h3d-layer h3d-corona" aria-hidden="true" />
+          {/* Browser frame outline (appears on compile) */}
+          <div className="hc-frame" />
 
-        {/* ══ Layer 2: Side panel — Stack · translateZ(0) ══ */}
-        <div className="h3d-layer h3d-side h3d-side--stack">
-          <p className="h3d-side__label">Stack</p>
-          <div className="h3d-side__badges">
-            {TECH.map(t => (
-              <span key={t} className="h3d-side__badge">{t}</span>
-            ))}
-          </div>
-        </div>
-
-        {/* ══ Layer 3: Side panel — Perf · translateZ(20px) ══ */}
-        <div className="h3d-layer h3d-side h3d-side--perf">
-          <PerfMini />
-          <p className="h3d-side__label" style={{ marginTop: '0.5rem' }}>Performance</p>
-          <p className="h3d-side__stat">LCP 1.2s · CLS 0.02</p>
-        </div>
-
-        {/* ══ Layer 4: Main dashboard card · translateZ(50px) ══ */}
-        <div className="h3d-layer h3d-card">
-
-          {/* Browser chrome */}
-          <div className="h3d-chrome">
-            <div className="h3d-chrome__dots">
-              <span /><span /><span />
+          {/* Browser chrome bar (slides in on compile) */}
+          <div className="hc-chrome">
+            <div className="hc-chrome__dots"><span /><span /><span /></div>
+            <div className="hc-urlbar">
+              <span className="hc-url-dot" />
+              <span className="hc-url-text" />
             </div>
-            <div className="h3d-chrome__tab">
-              <span className="h3d-chrome__tab-icon" aria-hidden="true">⬡</span>
-              dashboard.primus.dev
+            <div className="hc-status">
+              <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              deployed
             </div>
           </div>
 
-          {/* KPI stat row */}
-          <div className="h3d-kpi-row">
-            {KPIS.map(k => (
-              <div key={k.label} className="h3d-kpi" data-target={k.raw}>
-                <span className="h3d-kpi__num h3d-kpi-num">{k.value}</span>
-                <span className="h3d-kpi__label">{k.label}</span>
-              </div>
-            ))}
-          </div>
+          {/* The artboard / live canvas */}
+          <div className="hc-artboard">
+            <div className="hc-grid" />
+            <div className="hc-paper" />
 
-          {/* Revenue sparkline */}
-          <div className="h3d-spark-wrap">
-            <span className="h3d-spark-label">Revenue</span>
-            <svg
-              className="h3d-sparkline-svg"
-              viewBox="0 0 164 44"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="h3d-sg" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6366f1" stopOpacity="0.22" />
-                  <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {/* Area fill (always visible) */}
-              <path d={`${SPARK_D} L164,44 L0,44 Z`} fill="url(#h3d-sg)" />
-              {/* Line — Phase 3 will animate via stroke-dashoffset */}
-              <path
-                className="h3d-spark-line"
-                d={SPARK_D}
-                stroke="#6366f1"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray={SPARK_LEN}
-                strokeDashoffset={0}
-              />
+            {/* Wireframe layer — drawn via stroke-dashoffset */}
+            <svg className="hc-wires" viewBox={`0 0 ${ART_W} ${ART_H}`} fill="none" preserveAspectRatio="none">
+              {BLOCKS.map(b => {
+                const peri = perimeter(b)
+                return (
+                  <rect
+                    key={b.id}
+                    className="hc-wire"
+                    data-peri={peri}
+                    x={b.x} y={b.y} width={b.w} height={b.h} rx={b.r}
+                    strokeDasharray={peri}
+                    strokeDashoffset={peri}
+                  />
+                )
+              })}
             </svg>
-          </div>
 
-          {/* Build progress */}
-          <div className="h3d-progress-wrap">
-            <div className="h3d-progress-track">
-              <div className="h3d-progress-fill h3d-prog-fill" style={{ width: '82%' }} />
+            {/* Fill layer — coloured UI that snaps in */}
+            <div className="hc-fills">
+              {BLOCKS.map(b => (
+                <div
+                  key={b.id}
+                  className={`hc-fill hc-fill--${b.kind}`}
+                  style={{ left: b.x, top: b.y, width: b.w, height: b.h, borderRadius: b.r }}
+                />
+              ))}
             </div>
-            <div className="h3d-progress-meta">
-              <span>Build progress</span>
-              <span className="h3d-prog-pct">82%</span>
+
+            {/* The working cursor */}
+            <div className="hc-cursor">
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="#fff" aria-hidden="true">
+                <path d="M5 2l13 8-7 2-3 7z" />
+              </svg>
+              <span className="hc-cursor__tag">Primus</span>
             </div>
           </div>
+        </div>{/* end .hc-stage */}
 
-          {/* Deploy status */}
-          <div className="h3d-deploy">
-            <span className="h3d-deploy-pulse" aria-hidden="true" />
-            <span className="h3d-deploy-dot"   aria-hidden="true" />
-            <span>Deployed · 3 min ago</span>
-          </div>
-
-        </div>{/* end .h3d-card */}
-
-        {/* ══ Layer 5: Status chips · translateZ(70px) ══ */}
-        <div className="h3d-layer h3d-chips-layer" aria-hidden="true">
-          {CHIPS.map((chip, i) => (
-            <div
-              key={i}
-              ref={el => { chipRefs.current[i] = el }}
-              className="h3d-chip"
-              style={{ '--chip-color': chip.color, ...chip.style } as React.CSSProperties}
-            >
-              <span className="h3d-chip__icon" style={{ color: chip.color }}>{chip.icon}</span>
-              <span className="h3d-chip__text">{chip.label}</span>
+        {/* ══ Floating metric chips — closest to camera ══ */}
+        <div className="hc-chips">
+          {CHIPS.map(c => (
+            <div key={c.id} className="hc-chip" style={c.style}>
+              <span className="hc-chip__dot" style={{ background: c.dot }} />
+              <span className="hc-chip__label">{c.label}</span>
             </div>
           ))}
         </div>
 
-        {/* ══ Layer 6: Cursor actor · translateZ(90px) ══ */}
-        <div className="h3d-layer h3d-cursor-actor">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="white" aria-hidden="true">
-            <path d="M5 2l13 8-7 2-3 7z" />
-          </svg>
-          <span className="h3d-cursor-actor__label">Primus</span>
-        </div>
-
-      </div>{/* end .h3d-scene */}
+      </div>{/* end .hc-scene */}
     </div>
   )
 }

@@ -5,30 +5,30 @@ import gsap from 'gsap'
 
 const ORBS = [
   { label: 'Core Web Vitals', pos: 'tl', z: 90 },
-  { label: 'Schema Markup',   pos: 'tr', z: 70 },
-  { label: 'Sub-2s Loads',    pos: 'bl', z: 80 },
-  { label: 'Rank Tracking',   pos: 'br', z: 60 },
+  { label: 'Schema Markup', pos: 'tr', z: 70 },
+  { label: 'Sub-2s Loads', pos: 'bl', z: 80 },
+  { label: 'Rank Tracking', pos: 'br', z: 60 },
 ]
 
 const TABS = [
   { key: 'performance', label: 'Performance' },
-  { key: 'search',      label: 'Search Preview' },
+  { key: 'search', label: 'Search Preview' },
 ] as const
 
 const VITALS = [
-  { key: 'lcp', label: 'LCP', value: '1.2s',  target: 'Target < 2.5s', pct: 0.85 },
+  { key: 'lcp', label: 'LCP', value: '1.2s', target: 'Target < 2.5s', pct: 0.85 },
   { key: 'inp', label: 'INP', value: '180ms', target: 'Target < 200ms', pct: 0.78 },
-  { key: 'cls', label: 'CLS', value: '0.04',  target: 'Target < 0.10', pct: 0.92 },
+  { key: 'cls', label: 'CLS', value: '0.04', target: 'Target < 0.10', pct: 0.92 },
 ]
 
 const TREND = [30, 45, 40, 60, 55, 80, 92]
 const TREND_LABELS = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7']
 
 const KEYWORDS = [
-  { term: 'seo services mumbai',      pos: 2, delta: 3, dir: 'up' as const   },
-  { term: 'core web vitals audit',    pos: 4, delta: 1, dir: 'up' as const   },
-  { term: 'technical seo agency',     pos: 7, delta: 0, dir: 'same' as const },
-  { term: 'page speed optimization',  pos: 3, delta: 5, dir: 'up' as const   },
+  { term: 'seo services mumbai', pos: 2, delta: 3, dir: 'up' as const },
+  { term: 'core web vitals audit', pos: 4, delta: 1, dir: 'up' as const },
+  { term: 'technical seo agency', pos: 7, delta: 0, dir: 'same' as const },
+  { term: 'page speed optimization', pos: 3, delta: 5, dir: 'up' as const },
 ]
 
 const SCORE_TARGET = 98
@@ -38,7 +38,7 @@ const SCORE_C = 2 * Math.PI * SCORE_R
 function CheckIcon() {
   return (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="m5 10 3.5 3.5L15 6.5"/>
+      <path d="m5 10 3.5 3.5L15 6.5" />
     </svg>
   )
 }
@@ -46,7 +46,7 @@ function CheckIcon() {
 function StarIcon() {
   return (
     <svg viewBox="0 0 20 20" fill="currentColor">
-      <path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9L10 14.9l-5.2 2.9 1-5.9L1.5 7.7l5.9-.8z"/>
+      <path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.2 1 5.9L10 14.9l-5.2 2.9 1-5.9L1.5 7.7l5.9-.8z" />
     </svg>
   )
 }
@@ -54,7 +54,7 @@ function StarIcon() {
 function TrendArrow({ dir }: { dir: 'up' | 'down' }) {
   return (
     <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-      <path d={dir === 'up' ? 'M6 10V2M2 6l4-4 4 4' : 'M6 2v8M2 6l4 4 4-4'}/>
+      <path d={dir === 'up' ? 'M6 10V2M2 6l4-4 4 4' : 'M6 2v8M2 6l4 4 4-4'} />
     </svg>
   )
 }
@@ -62,29 +62,29 @@ function TrendArrow({ dir }: { dir: 'up' | 'down' }) {
 function BookmarkIcon({ filled }: { filled: boolean }) {
   return (
     <svg viewBox="0 0 20 20" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.8}>
-      <path d="M5 2.5h10v15l-5-3.3-5 3.3z" strokeLinejoin="round"/>
+      <path d="M5 2.5h10v15l-5-3.3-5 3.3z" strokeLinejoin="round" />
     </svg>
   )
 }
 
 export function PerformanceSeoHero3D() {
-  const wrapRef  = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<HTMLDivElement>(null)
-  const timers   = useRef<ReturnType<typeof setTimeout>[]>([])
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
 
-  const [hovered, setHovered]       = useState(false)
-  const [activeTab, setActiveTab]   = useState<typeof TABS[number]['key']>('performance')
-  const [vitalsOn, setVitalsOn]     = useState(false)
-  const [trendOn, setTrendOn]       = useState(false)
-  const [score, setScore]           = useState(0)
+  const [hovered, setHovered] = useState(false)
+  const [activeTab, setActiveTab] = useState<typeof TABS[number]['key']>('performance')
+  const [vitalsOn, setVitalsOn] = useState(false)
+  const [trendOn, setTrendOn] = useState(false)
+  const [score, setScore] = useState(0)
   const [vitalHover, setVitalHover] = useState<number | null>(null)
   const [trendHover, setTrendHover] = useState<number | null>(null)
-  const [schemaOn, setSchemaOn]     = useState(true)
-  const [pinned, setPinned]         = useState<number | null>(null)
+  const [schemaOn, setSchemaOn] = useState(true)
+  const [pinned, setPinned] = useState<number | null>(null)
 
   /* float + 3D tilt */
   useEffect(() => {
-    const wrap  = wrapRef.current
+    const wrap = wrapRef.current
     const scene = sceneRef.current
     if (!wrap || !scene) return
 
@@ -93,9 +93,9 @@ export function PerformanceSeoHero3D() {
     })
 
     const onMove = (e: MouseEvent) => {
-      const r  = wrap.getBoundingClientRect()
-      const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2)
-      const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2)
+      const r = wrap.getBoundingClientRect()
+      const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2)
+      const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2)
       gsap.to(scene, {
         rotateY: dx * 16,
         rotateX: -dy * 12,
@@ -170,7 +170,7 @@ export function PerformanceSeoHero3D() {
           <div className="pso-header">
             <div className="pso-site">
               <span className="pso-site-favicon">P</span>
-              primus.software
+              https://www.primusoftware.com
             </div>
             <div className="pso-live">
               <span className="pso-live-dot" />
@@ -205,11 +205,11 @@ export function PerformanceSeoHero3D() {
                   <svg viewBox="0 0 100 100" width="84" height="84">
                     <defs>
                       <linearGradient id="pso-score-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#22d3ee"/>
-                        <stop offset="100%" stopColor="#10b981"/>
+                        <stop offset="0%" stopColor="#22d3ee" />
+                        <stop offset="100%" stopColor="#10b981" />
                       </linearGradient>
                     </defs>
-                    <circle cx="50" cy="50" r={SCORE_R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8"/>
+                    <circle cx="50" cy="50" r={SCORE_R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
                     <circle
                       cx="50" cy="50" r={SCORE_R} fill="none" stroke="url(#pso-score-grad)" strokeWidth="8"
                       strokeDasharray={SCORE_C} strokeDashoffset={scoreOffset} strokeLinecap="round"
@@ -239,7 +239,7 @@ export function PerformanceSeoHero3D() {
                     {vitalHover === i && <span className="pso-vital-tip">{v.target}</span>}
                     <div className="pso-vital-head">
                       <span className="pso-vital-label">{v.label}</span>
-                      <span className="pso-vital-badge"><CheckIcon/></span>
+                      <span className="pso-vital-badge"><CheckIcon /></span>
                     </div>
                     <span className="pso-vital-value">{v.value}</span>
                     <div className="pso-vital-bar">
@@ -296,12 +296,12 @@ export function PerformanceSeoHero3D() {
                   <span className="pso-serp-favicon">P</span>
                   <div className="pso-serp-url">
                     <span className="pso-serp-name">Primus Software</span>
-                    <span className="pso-serp-breadcrumb">primus.software › services › seo</span>
+                    <span className="pso-serp-breadcrumb">https://primusoftware.com › services › seo</span>
                   </div>
                 </div>
                 <p className="pso-serp-title">Performance &amp; SEO Services | Primus Software</p>
                 <div className={`pso-serp-rating${schemaOn ? '' : ' hidden'}`}>
-                  {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i}/>)}
+                  {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} />)}
                   <span className="pso-serp-rating-num">4.9</span>
                   <span className="pso-serp-rating-count">(128 reviews)</span>
                 </div>
@@ -328,10 +328,10 @@ export function PerformanceSeoHero3D() {
                     <span className="pso-kw-pos">#{k.pos}</span>
                     <span className="pso-kw-term">{k.term}</span>
                     <span className={`pso-kw-trend pso-kw-trend--${k.dir}`}>
-                      {k.dir !== 'same' && <TrendArrow dir={k.dir}/>}
+                      {k.dir !== 'same' && <TrendArrow dir={k.dir} />}
                       {k.dir !== 'same' ? k.delta : '—'}
                     </span>
-                    <span className="pso-kw-bookmark"><BookmarkIcon filled={pinned === i}/></span>
+                    <span className="pso-kw-bookmark"><BookmarkIcon filled={pinned === i} /></span>
                   </button>
                 ))}
               </div>
